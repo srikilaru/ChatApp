@@ -9,17 +9,16 @@ var MainController = {
          
     },
     signup: function (req, res) {
-       res.send(200,{msg:"Testing"});
-        /*var username = req.param("username");
+        var username = req.param("username");
         var password = req.param("password");
          
         Users.findByUsername(username).done(function(err, usr){
             if (err) {
                 res.send(500, { error: "DB Error" });
-            } else if (usr) {
+            } /*else if (usr) {
                 
                 res.send(400, {error: "Username already Taken"});
-            } else {
+            }*/ else {
                 var hasher = require("password-hash");
                 password = hasher.generate(password);
                  
@@ -32,7 +31,7 @@ var MainController = {
                 }
             });
         }
-    });*/
+    });
     },
     login: function (req, res) {
          var username = req.param("username");

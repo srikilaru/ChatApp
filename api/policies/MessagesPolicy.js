@@ -2,6 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
+
+
 module.exports = function (req, res, next) {
     if (req.session.user) {
         var action = req.param('action');
@@ -14,4 +19,3 @@ module.exports = function (req, res, next) {
         res.send("You Must Be Logged In", 403);
     }
 };
-

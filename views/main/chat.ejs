@@ -10,22 +10,23 @@
     var MessageModel = Backbone.Model.extend({
         urlRoot: '/messages',
     });
- 
+
     var MessageCollection = Backbone.Collection.extend({
         url: '/messages',
         model: MessageModel,
     });
- 
-    var messages = new MessageCollection();
+
+    var messages = new MessageCollection(); console.log(messages);alert(messages)
     messages.fetch();
- 
+   
+
     $("#postMessageButton").click(function(){
         var messageText = $("#message").val();
         messages.create({message: messageText}, {wait: true});
         $("#message").val("");
     });
 
-_.templateSettings = {
+    _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
 };
 var MessagesView = Backbone.View.extend({
@@ -34,7 +35,7 @@ var MessagesView = Backbone.View.extend({
         this.collection.on('add', this.render, this);
         this.render();
     },
-    template: _.template("<div><p><b>{{ username }}: </b>{{ message }}</p></div>"),
+    template: _.template("<div><p><b> : </b>{{ message }}</p></div>"),
         render: function () {
             this.$el.html("");
             this.collection.each(function(msg){
@@ -42,8 +43,7 @@ var MessagesView = Backbone.View.extend({
             }, this)
     }
 });
- 
-var mView = new MessagesView({collection: messages});
+
 var SailsCollection = Backbone.Collection.extend({
     sailsCollection: "",
     socket: null,
@@ -60,7 +60,7 @@ var SailsCollection = Backbone.Collection.extend({
                 this.socket.request("/" + this.sailsCollection, where, _.bind(function(users){
                     this.set(users);
                 }, this));
-     
+    
                 this.socket.on("message", _.bind(function(msg){
                     var m = msg.uri.split("/").pop();
                     if (m === "create") {
@@ -76,5 +76,16 @@ var SailsCollection = Backbone.Collection.extend({
             console.log("Error: Cannot retrieve models because property 'sailsCollection' not set on the collection");
         }
     }
+
+
+
 });
+
+var MessageCollection = SailsCollection.extend({
+    sailsCollection: 'messages',
+    model: MessageModel
+});
+
+
+var mView = new MessagesView({collection: messages});
 </script>

@@ -38,9 +38,8 @@ $("#signupButton").click(function(){
     var password = $("#signupPassword").val();
     var confirmPassword = $("#signupConfirmPassword").val();
     if (username && password) {
-        if (password == confirmPassword) { 
-                  //param=JSON.stringify({username: username, password:password});  
-                        $.ajax({
+        if (password == confirmPassword) {  
+                      /*  $.ajax({
                         type: "POST",
                         url: "/signup",
                         data: {username: username, password:password},
@@ -55,8 +54,8 @@ $("#signupButton").click(function(){
                             alert(errormessage.getResponseHeader("msg"));
 
                         }
-                    }); 
-          /*  $.post(
+                    }); */
+            $.post(
                 '/signup',
                 {username: username, password:password},
                 function () {
@@ -64,7 +63,7 @@ $("#signupButton").click(function(){
                 }
             ).fail(function(res){
                 alert("Error: " + res.getResponseHeader("error"));
-            }); */
+            }); 
         } else {
             alert("Passwords don't match");
         }   
